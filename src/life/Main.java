@@ -11,8 +11,9 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException{
-
+    public static void main(String[] args) throws IOException, InterruptedException{
+        
+        cls();
         // instantiate new board
         Board board = new Board();
         List<String> golList = new LinkedList<>();
@@ -47,10 +48,16 @@ public class Main {
 
         for(int i =0; i<generations;i++){
             board.nextGen();
-            System.out.println("Generation"+(i+1));
+            cls();
+            System.out.println("Generation "+(i+1));
             board.printGeneration();
+            Thread.sleep(1000);
         }
-        System.out.println("Thats life");
-        
+        System.out.println("Thats life");        
     }    
+    public static void cls(){
+        try{
+            new ProcessBuilder("cmd","/c","cls").inheritIO().start().waitFor();
+        } catch (Exception E){}
+    }
 }

@@ -11,7 +11,7 @@ public class Board {
     // Constructors
     public Board(){}
     
-    // 
+    // methods
     public void initiallize(List<String> golList){
         int gridX=0;
         int gridY=0;
@@ -57,7 +57,7 @@ public class Board {
                 if(i==1){
                     System.out.printf("*");
                 } else{
-                    System.out.printf("-");
+                    System.out.printf(" ");
                 }
             }
             System.out.println("\n");
@@ -91,8 +91,6 @@ public class Board {
                         if(sum>=3){board[j][i]=1;} 
                         else{board[j][i]=0;}                        
                         break;
-
-
                 }
             }
         }
