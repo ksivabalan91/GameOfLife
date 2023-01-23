@@ -8,8 +8,10 @@ public class Board {
 
     private int[][] board;
 
+    // Constructors
     public Board(){}
     
+    // 
     public void initiallize(List<String> golList){
         int gridX=0;
         int gridY=0;
@@ -59,11 +61,78 @@ public class Board {
                 }
             }
             System.out.println("\n");
-        }
-        
+        }        
     }    
+    public void printNumGeneration(){
+        for(int j=0; j<board.length;j++){
+            for (int i : board[j]){
+                System.out.printf("%d",i);
+            }
+            System.out.println("\n");
+        }        
+    }           
 
     public void nextGen(){
-        
+        for(int j=0; j<board.length;j++){
+            for (int i =0 ; i< board[j].length;i++){
+                int occupancy = board[j][i];
+                int sum = 0;
+                
+                switch(occupancy){
+                    case 1:
+                        sum = totalNeighbours(i, j, board);
+
+                        if(sum==2||sum==3){board[j][i]=1;}
+                        else{board[j][i]=0;}
+                        break;
+
+                    case 0:
+                        sum = totalNeighbours(i, j, board);
+                        if(sum>=3){board[j][i]=1;} 
+                        else{board[j][i]=0;}                        
+                        break;
+
+
+                }
+            }
+        }
+    }
+    public static int totalNeighbours(int i, int j, int[][] board){
+        int topLeft;
+        if((i-1)>=0 && (j-1)>=0){topLeft=board[j-1][i-1];}
+        else {topLeft=0;}
+
+        int topCenter;
+        if(j-1>=0){topCenter=board[j-1][i];}
+        else {topCenter=0;}
+
+        int topRight;
+        if((i+1)<board[j].length && (j-1)>=0){topRight=board[j-1][i+1];}
+        else {topRight=0;}
+
+        int left;
+        if((i-1)>=0){left=board[j][i-1];}
+        else {left=0;}
+
+        int right;
+        if((i+1)<board[j].length){right=board[j][i+1];}
+        else {right=0;}
+
+        int bottomLeft;
+        if((i-1)>=0 && (j+1)<board.length){bottomLeft=board[j+1][i-1];}
+        else {bottomLeft=0;}
+
+        int bottomCenter;
+        if(j+1<board.length){bottomCenter=board[j+1][i];}
+        else {bottomCenter=0;}
+
+        int bottomRight;
+        if((i+1)<board[j].length && (j+1)<board.length){bottomRight=board[j+1][i+1];}
+        else {bottomRight=0;}
+
+        int sum =   topLeft +       topCenter +     topRight +
+                    left +                          right +
+                    bottomLeft +    bottomCenter +  bottomRight;
+        return sum;
     }
 }

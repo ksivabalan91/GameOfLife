@@ -39,9 +39,11 @@ public class Main {
         board.initiallize(golList);
         System.out.println("Generation 0");
         board.printGeneration();
+        // board.printNumGeneration();
 
         System.out.println("Enter number of generations to iterate: ");
         int generations = scan.nextInt();
+        scan.close();
 
         for(int i =0; i<generations;i++){
             board.nextGen();
